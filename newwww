@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Sakshi ❤️</title>
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <style>
+        /* Hides content by default for the password lock */
+        #main-content { display: none; }
+        
+        body {
+            background-color: #ffeef2;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden; 
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+        }
+        h1 { color: #d63384; margin-bottom: 10px; }
+        h2 { color: #ff4d6d; font-style: italic; font-size: 1.1rem; line-height: 1.5; margin-top: 20px; }
+        
+        .btn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .btn:hover { background-color: #c9184a; transform: scale(1.05); }
+        
+        #no-btn { position: absolute; transition: 0.1s; }
+        .hidden { display: none; }
+
+        .gift-box {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            background: #ffb3c1;
+            margin: 10px;
+            line-height: 80px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #d63384;
+            transition: transform 0.2s;
+        }
+        .gift-box:hover { transform: scale(1.1); background: #ff4d6d; color: white; }
+
+        #animationCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .video-wrapper {
+            margin-top: 20px;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-content">
+        <canvas id="animationCanvas"></canvas>
+
+        <div id="page1" class="container">
+            <h1>Sakshi, will you be my Valentine? 🌹</h1>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpsemN4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JnB0PWEmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/c76IJLufpNwSULPk77/giphy.gif" width="200">
+            <br>
+            <button class="btn" onclick="showPage(2)">Yes!</button>
+            <button class="btn" id="no-btn" onmouseover="moveButton()">No</button>
+        </div>
+
+        <div id="page2" class="container hidden">
+            <h1>Yay! You said yes! ❤️</h1>
+            <p>I made all these for you babe</p>
+            <div style="border: 2px dashed #ff4d6d; padding: 15px; border-radius: 15px; margin-bottom: 20px;">
+                 <span>Click each box to open your gifts!</span>
+            </div>
+            <div>
+                <div class="gift-box" onclick="window.open('https://cyan-doreen-22.tiiny.site', '_blank')">Gift 1</div>
+                <div class="gift-box" onclick="window.open('https://emerald-gayle-93.tiiny.site', '_blank')">Gift 2</div>
+                <div class="gift-box" onclick="window.open('https://violet-corinne-6.tiiny.site', '_blank')">Gift 3</div>                                                                              
+                <div class="gift-box" onclick="window.open('https://aqua-cecilia-71.tiiny.site', '_blank')">Gift 4</div>
+            </div>
+            <br>
+            <button class="btn" onclick="showPage(3)">Next surprise ✨</button>
+        </div>
+
+        <div id="page3" class="container hidden">
+            <h1>Yayyy!! You made my day, Sakshi! 🥰</h1>
+            <button id="play-video-btn" class="btn" onclick="revealVideo()">
+                ▶ Click to watch a special video! ❤️
+            </button>
+            <div id="video-container" class="hidden">
+                <div class="video-wrapper">
+                    <iframe id="video-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+            </div>
+            <h2>"Babe specially i made this for you✨🌹"</h2>
+        </div>
+    </div>
+
+    <script>
+        // Password Protection Logic
+        (function() {
+            var pass = prompt("Enter the secret password to see your gift ❤️");
+            if (pass === "sakshiraj") {
+                // Wait for page to load then show content
+                window.onload = function() {
+                    document.getElementById("main-content").style.display = "block";
+                };
+            } else {
+                alert("Wrong password! Please try again.");
+                document.body.innerHTML = "<h1 style='color:#d63384; margin-top:50px;'>Access Denied</h1><p>Only Sakshi or people with the secret key can enter here.</p>";
+            }
+        })();
+
+        function showPage(pageNum) {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.add('hidden');
+            document.getElementById('page' + pageNum).classList.remove('hidden');
+            if(pageNum === 3) { initCreateJS(); }
+        }
+
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 100);
+            const btn = document.getElementById('no-btn');
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function revealVideo() {
+            const videoContainer = document.getElementById('video-container');
+            const videoIframe = document.getElementById('video-iframe');
+            const playBtn = document.getElementById('play-video-btn');
+            videoIframe.src = "https://blue-nat-76.tiiny.site"; 
+            videoContainer.classList.remove('hidden');
+            playBtn.classList.add('hidden');
+        }
+
+        function initCreateJS() {
+            var canvas = document.getElementById("animationCanvas");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            var stage = new createjs.Stage("animationCanvas");
+            var w = canvas.width;
+            var h = canvas.height;
+            var text = new createjs.Text("the longer I'm with you the more I love you", "bold 20px Arial", "#d63384");
+            text.textAlign = "center";
+            text.x = w / 2;
+            text.y = h - 40; 
+            stage.addChild(text);
+            createjs.Ticker.addEventListener("tick", stage);
+        }
+    </script>
+</body>
+</html>
